@@ -1,15 +1,17 @@
 package co.edu.uniquindio.proyectofinal.proyectofinal.model;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class Cliente extends Usuario{
     private String idCliente;
-    private String Correo;
+    private String correo;
     LinkedList<Envio> envios;
-    public Cliente(String idCliente, String Correo, String nombre, String numTelefono) {
+    List<?> direccionesFrecuentes;
+    public Cliente(String idCliente, String correo, String nombre, String numTelefono) {
         super(nombre, numTelefono);
         this.idCliente = idCliente;
-        this.Correo = Correo;
+        this.correo = correo;
         envios = new LinkedList<>();
     }
     public String getIdCliente() {
@@ -19,10 +21,10 @@ public class Cliente extends Usuario{
         this.idCliente = idCliente;
     }
     public String getCorreo() {
-        return Correo;
+        return correo;
     }
     public void setCorreo(String Correo) {
-        this.Correo = Correo;
+        this.correo = Correo;
     }
 
     public LinkedList<Envio> getEnvios() {
@@ -32,6 +34,7 @@ public class Cliente extends Usuario{
     public void setEnvios(LinkedList<Envio> envios) {
         this.envios = envios;
     }
+
     public boolean agregarServiciosEnvio(String idEnvioActualizar, Prioridad prioridad,
                                          ServicioAdicional servicioAdicional) {
 
@@ -44,6 +47,27 @@ public class Cliente extends Usuario{
 
         }
         return false;
+    }
 
+    // 1. Registrarse (crear cliente)
+    public static Cliente registrarse(String idCliente, String nombre, String correo, String telefono) {
+        return new Cliente(idCliente, nombre, correo, telefono);
+    }
+
+    // 2. Gestionar perfil
+    public boolean actualizarPerfil(String nuevoNombre, String nuevoCorreo, String nuevoTelefono, List<String> nuevasDirecciones) {
+        this.nombre = nuevoNombre;
+        this.correo = nuevoCorreo;
+        this.numTelefono = nuevoTelefono;
+        this.direccionesFrecuentes = nuevasDirecciones != null ? nuevasDirecciones : this.direccionesFrecuentes;
+        return true;
+    }
+
+    // 8. Consultar historial de envíos con filtros
+    public List<Envio> consultarHistorialEnvios(String fecha, EstadoEnvio estado) {
+        return envios.stream()
+                .filter(envio -> (fecha == null || envio.getFechaCreacion().equals(fecha)))
+                .filter(envio -> (estado == null || envio.getEstadoEnvio() == estado))
+                .toList();
     }
 }

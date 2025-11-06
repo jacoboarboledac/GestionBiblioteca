@@ -1,13 +1,13 @@
-package co.edu.uniquindio.proyectofinal.proyectofinal.model;
+package co.edu.uniquindio.proyectofinal.proyectofinal.strategy;
 
 import co.edu.uniquindio.proyectofinal.proyectofinal.services.ITarifa;
 
-public class Tarifa {
+public  class Tarifa  {
     private double distancia;
     private double peso;
     private double volumen;
     private double adicionales;
-    private ITarifa strategy;  // Estrategia inyectada
+    private ITarifa strategy;
 
     public Tarifa(double distancia, double peso, double volumen, double adicionales, ITarifa strategy) {
         this.distancia = distancia;

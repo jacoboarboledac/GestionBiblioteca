@@ -1,4 +1,4 @@
-package co.edu.uniquindio.proyectofinal.proyectofinal.model;
+package co.edu.uniquindio.proyectofinal.proyectofinal.strategy;
 
 import co.edu.uniquindio.proyectofinal.proyectofinal.services.ITarifa;
 
