@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<TabPane prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #f8f9fa;" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.proyectofinal.proyectofinal.viewController.RepartidorViewController">
+
+   <!-- ========================================== -->
+   <!-- Pestaña 1: Gestión de Repartidores -->
+   <!-- ========================================== -->
+   <Tab text="Repartidores">
+      <content>
+         <BorderPane>
+            <!-- Panel superior: formulario y botones -->
+            <top>
+               <VBox spacing="12.0" BorderPane.alignment="CENTER">
+                  <padding>
+                     <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                  </padding>
+                  <Label style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Gestión de Repartidores" />
+
+                  <HBox spacing="8.0">
+                     <TextField fx:id="txtIdRepartidor" prefWidth="80.0" promptText="ID" />
+                     <TextField fx:id="txtNombreRepartidor" promptText="Nombre" />
+                     <TextField fx:id="txtVehiculo" promptText="Vehículo" />
+                     <ComboBox fx:id="comboDisponibilidad" prefWidth="120.0" promptText="Disponibilidad">
+                        <items>
+                           <FXCollections fx:factory="observableArrayList">
+                              <String fx:value="Activo" />
+                              <String fx:value="Inactivo" />
+                              <String fx:value="En ruta" />
+                           </FXCollections>
+                        </items>
+                     </ComboBox>
+
+                     <Button fx:id="btnCrearRepartidor" onAction="#crearRepartidor" text="Crear" />
+                     <Button fx:id="btnActualizarRepartidor" onAction="#actualizarRepartidor" text="Actualizar" />
+                     <Button fx:id="btnEliminarRepartidor" onAction="#eliminarRepartidor" text="Eliminar" />
+                  </HBox>
+               </VBox>
+            </top>
+
+            <!-- Panel central: tabla de repartidores -->
+            <center>
+               <VBox spacing="10.0">
+                  <padding>
+                     <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                  </padding>
+                  <Label style="-fx-font-weight: bold;" text="Lista de Repartidores" />
+                  <TableView fx:id="tablaRepartidores" prefHeight="400.0">
+                     <columns>
+                        <TableColumn fx:id="colIdRepartidor" prefWidth="80.0" text="ID" />
+                        <TableColumn fx:id="colNombreRepartidor" prefWidth="180.0" text="Nombre" />
+                        <TableColumn fx:id="colVehiculo" prefWidth="150.0" text="Zona" />
+                        <TableColumn fx:id="colDisponibilidad" prefWidth="150.0" text="Disponibilidad" />
+                     </columns>
+                  </TableView>
+               </VBox>
+            </center>
+         </BorderPane>
+      </content>
+   </Tab>
+
+   <!-- ========================================== -->
+   <!-- Pestaña 2: Envíos Asignados -->
+   <!-- ========================================== -->
+   <Tab text="Envíos Asignados">
+      <content>
+         <BorderPane>
+            <!-- Panel superior: solo el botón -->
+            <top>
+               <VBox spacing="12.0" BorderPane.alignment="CENTER">
+                  <padding>
+                     <Insets top="12.0" right="12.0" bottom="12.0" left="12.0"/>
+                  </padding>
+                  <Label text="Envíos Asignados" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+                  <HBox spacing="8.0">
+                     <Button fx:id="btnCargarEnvios" onAction="#cargarEnviosAsignados" text="Cargar Envíos"/>
+                  </HBox>
+               </VBox>
+            </top>
+
+            <!-- Panel central: tabla de envíos -->
+            <center>
+               <VBox spacing="10.0">
+                  <padding>
+                     <Insets top="12.0" right="12.0" bottom="12.0" left="12.0"/>
+                  </padding>
+                  <Label text="Lista de Envíos Asignados" style="-fx-font-weight: bold;"/>
+                  <TableView fx:id="tablaEnviosAsignados" prefHeight="400.0">
+                     <columns>
+                        <TableColumn fx:id="colIdEnvioAsignado" text="ID Envío" prefWidth="100.0"/>
+                        <TableColumn fx:id="colClienteAsignado" text="Cliente" prefWidth="180.0"/>
+                        <TableColumn fx:id="colEstadoAsignado" text="Estado" prefWidth="120.0"/>
+                        <TableColumn fx:id="colDireccionAsignado" text="Dirección" prefWidth="200.0"/>
+                     </columns>
+                  </TableView>
+               </VBox>
+            </center>
+         </BorderPane>
+      </content>
+   </Tab>
+
+</TabPane>

@@ -19,5 +19,8 @@ public class Paquete {
     public void setDimensiones(double dimensiones) {
         this.dimensiones = dimensiones;
     }
+    public static PaqueteBuilder builder() {
+        return new PaqueteBuilder();
+    }
 
 }

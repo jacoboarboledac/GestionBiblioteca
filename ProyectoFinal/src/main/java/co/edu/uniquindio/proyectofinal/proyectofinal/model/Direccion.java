@@ -21,5 +21,11 @@ public class Direccion {
     public void setNombreDireccion(String nombreDireccion) {
         this.nombreDireccion = nombreDireccion;
     }
+    public String getCoordenadas() {
+        return coordenadas;
+    }
+    public void setCoordenadas(String coordenadas) {
+        this.coordenadas = coordenadas;
+    }
 }
 

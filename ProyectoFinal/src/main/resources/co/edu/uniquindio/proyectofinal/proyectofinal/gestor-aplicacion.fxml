@@ -1,30 +1,155 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TabPane?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.geometry.Insets?>
 
+<TabPane xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml"
+         fx:controller="co.edu.uniquindio.proyectofinal.proyectofinal.viewController.GestorAplicacionViewController"
+         prefWidth="950" prefHeight="650"
+         tabClosingPolicy="UNAVAILABLE">
 
-<AnchorPane prefHeight="626.0" prefWidth="785.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.proyectofinal.proyectofinal.gesto-aplicacion">
-   <children>
-      <TabPane layoutX="-1.0" layoutY="-2.0" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="Cliente">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="466.0" prefWidth="674.0" />
-            </content>
-          </Tab>
-          <Tab text="Administrador">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
-          </Tab>
-            <Tab text="Repartidor">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-              </content>
-            </Tab>
-        </tabs>
-      </TabPane>
-   </children>
-</AnchorPane>
+    <tabs>
+
+        <!-- TAB 1: Clientes -->
+        <Tab text="Clientes">
+            <BorderPane>
+                <top>
+                    <VBox spacing="10">
+                        <padding>
+                            <Insets top="10" right="10" bottom="10" left="10"/>
+                        </padding>
+                        <HBox spacing="10">
+                            <TextField fx:id="txtNombreCliente" promptText="Nombre" prefWidth="150"/>
+                            <TextField fx:id="txtCorreoCliente" promptText="Correo" prefWidth="200"/>
+                            <Button fx:id="btnCrearCliente" onAction="#crearCliente" text="Crear Cliente"/>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                            <Button fx:id="btnEliminarCliente" onAction="#eliminarCliente" text="Eliminar Cliente Seleccionado"/>
+                        </HBox>
+                    </VBox>
+                </top>
+                <center>
+                    <TableView fx:id="tablaClientes" prefHeight="400.0">
+                        <columns>
+                            <TableColumn fx:id="colIdCliente" text="ID" prefWidth="100"/>
+                            <TableColumn fx:id="colNombreCliente" text="Nombre" prefWidth="180"/>
+                            <TableColumn fx:id="colCorreoCliente" text="Correo" prefWidth="250"/>
+                        </columns>
+                    </TableView>
+                </center>
+            </BorderPane>
+        </Tab>
+
+        <!-- TAB 2: Repartidores -->
+        <Tab text="Repartidores">
+            <BorderPane>
+                <top>
+                    <VBox spacing="10">
+                        <padding>
+                            <Insets top="10" right="10" bottom="10" left="10"/>
+                        </padding>
+                        <HBox spacing="10">
+                            <TextField fx:id="txtNombreRepartidor" promptText="Nombre" prefWidth="150"/>
+                            <TextField fx:id="txtVehiculoRepartidor" promptText="Vehículo/Zona" prefWidth="150"/>
+                            <Button fx:id="btnAgregarRepartidor" onAction="#agregarRepartidor" text="Agregar Repartidor"/>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                            <Button fx:id="btnEliminarRepartidor" onAction="#eliminarRepartidor" text="Eliminar Repartidor Seleccionado"/>
+                        </HBox>
+                    </VBox>
+                </top>
+                <center>
+                    <TableView fx:id="tablaRepartidores" prefHeight="400.0">
+                        <columns>
+                            <TableColumn fx:id="colIdRepartidor" text="ID" prefWidth="100"/>
+                            <TableColumn fx:id="colNombreRepartidorTabla" text="Nombre" prefWidth="180"/>
+                            <TableColumn fx:id="colDisponibilidadRepartidor" text="Disponibilidad" prefWidth="150"/>
+                        </columns>
+                    </TableView>
+                </center>
+            </BorderPane>
+        </Tab>
+
+        <!-- TAB 3: Gestión de Envíos -->
+        <Tab text="Gestión de Envíos">
+            <BorderPane>
+                <top>
+                    <VBox spacing="10">
+                        <padding>
+                            <Insets top="10" right="10" bottom="10" left="10"/>
+                        </padding>
+                        <HBox spacing="10">
+                            <TextField fx:id="txtIdEnvioAsignar" promptText="ID Envío" prefWidth="120"/>
+                            <TextField fx:id="txtIdRepartidorAsignar" promptText="ID Repartidor" prefWidth="120"/>
+                            <Button fx:id="btnAsignarEnvio" onAction="#asignarEnvio" text="Asignar"/>
+                            <Button fx:id="btnReasignarEnvio" onAction="#reasignarEnvio" text="Reasignar"/>
+                        </HBox>
+                        <HBox spacing="10">
+                            <TextField fx:id="txtIdEnvioIncidencia" promptText="ID Envío para Incidencia" prefWidth="180"/>
+                            <Button fx:id="btnRegistrarIncidencia" onAction="#registrarIncidencia" text="Registrar Incidencia"/>
+                            <Button fx:id="btnActualizarEstado" onAction="#actualizarEstado" text="Avanzar Estado"/>
+                        </HBox>
+                    </VBox>
+                </top>
+                <center>
+                    <TableView fx:id="tablaEnviosGlobales" prefHeight="300.0">
+                        <columns>
+                            <TableColumn fx:id="colIdEnvioG" text="ID Envío" prefWidth="100"/>
+                            <TableColumn fx:id="colClienteG" text="Cliente" prefWidth="100"/>
+                            <TableColumn fx:id="colRepartidorG" text="Repartidor" prefWidth="100"/>
+                            <TableColumn fx:id="colEstadoG" text="Estado" prefWidth="100"/>
+                            <TableColumn fx:id="colIncidenciaG" text="Incidencia" prefWidth="100"/>
+                        </columns>
+                    </TableView>
+                </center>
+            </BorderPane>
+        </Tab>
+
+        <!-- TAB 4: Métricas -->
+        <Tab text="Métricas">
+            <BorderPane>
+                <padding>
+                    <Insets top="10" right="10" bottom="10" left="10"/>
+                </padding>
+                <center>
+                    <GridPane hgap="15" vgap="15">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="50"/>
+                            <ColumnConstraints percentWidth="50"/>
+                        </columnConstraints>
+                        <rowConstraints>
+                            <RowConstraints percentHeight="50"/>
+                            <RowConstraints percentHeight="50"/>
+                        </rowConstraints>
+
+                        <LineChart fx:id="lineChartTiempoPeriodo"
+                                   GridPane.rowIndex="0" GridPane.columnIndex="0"
+                                   prefHeight="250" prefWidth="400"
+                                   title="Tiempo de Entrega por Mes">
+                            <xAxis><CategoryAxis label="Mes"/></xAxis>
+                            <yAxis><NumberAxis label="Días"/></yAxis>
+                        </LineChart>
+
+                        <BarChart fx:id="barChartServicios"
+                                  GridPane.rowIndex="0" GridPane.columnIndex="1"
+                                  prefHeight="250" prefWidth="400"
+                                  title="Servicios Adicionales">
+                            <xAxis><CategoryAxis label="Servicio"/></xAxis>
+                            <yAxis><NumberAxis label="Cantidad"/></yAxis>
+                        </BarChart>
+
+                        <PieChart fx:id="pieChartIncidencias"
+                                  GridPane.rowIndex="1" GridPane.columnIndex="0"
+                                  prefHeight="250" prefWidth="400"
+                                  title="Incidencias por Zona"/>
+
+                    </GridPane>
+                </center>
+            </BorderPane>
+        </Tab>
+
+    </tabs>
+</TabPane>

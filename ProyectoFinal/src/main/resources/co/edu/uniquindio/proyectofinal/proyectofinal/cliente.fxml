@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane prefHeight="585.0" prefWidth="586.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.proyectofinal.proyectofinal.viewController.ClienteViewController">
+
+    <children>
+        <TabPane prefHeight="417.0" prefWidth="492.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+
+                <!-- ========================================== -->
+                <!-- RF-003: Cotizar envío -->
+                <!-- ========================================== -->
+                <Tab text="Cotizar Envío">
+                    <content>
+                        <AnchorPane>
+                            <children>
+                                <Label layoutX="50.0" layoutY="30.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Cotizador de Envíos" />
+                                <GridPane hgap="10" layoutX="50.0" layoutY="70.0" vgap="10">
+                                    <columnConstraints>
+                                        <ColumnConstraints prefWidth="120.0" />
+                                        <ColumnConstraints prefWidth="200.0" />
+                                    </columnConstraints>
+                                    <children>
+                                        <Label text="Origen:" />
+                                        <TextField fx:id="txtOrigen" GridPane.columnIndex="1" />
+
+                                        <Label text="Destino:" GridPane.rowIndex="1" />
+                                        <TextField fx:id="txtDestino" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                                        <Label text="Peso (kg):" GridPane.rowIndex="2" />
+                                        <TextField fx:id="txtPeso" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                                        <Label text="Volumen (m³):" GridPane.rowIndex="3" />
+                                        <TextField fx:id="txtVolumen" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                                        <Label text="Prioridad:" GridPane.rowIndex="4" />
+                                        <ComboBox fx:id="comboPrioridad" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    </children>
+                           <rowConstraints>
+                              <RowConstraints />
+                              <RowConstraints />
+                              <RowConstraints />
+                              <RowConstraints />
+                              <RowConstraints />
+                              <RowConstraints />
+                           </rowConstraints>
+                                </GridPane>
+                                <Label fx:id="lblResultadoCotizacion" layoutX="50.0" layoutY="360.0" text="Resultado:" />
+
+                                  <Button fx:id="btnCotizar" layoutX="169.0" layoutY="291.0" onAction="#cotizarEnvio" text="Calcular Tarifa" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+
+                <!-- ========================================== -->
+                <!-- RF-004 y RF-007: Solicitudes de envío -->
+                <!-- ========================================== -->
+                <Tab text="Solicitudes">
+                    <content>
+                        <AnchorPane prefHeight="470.0" prefWidth="492.0">
+                            <children>
+                                <Label layoutX="50.0" layoutY="30.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Gestión de Solicitudes" />
+                                <GridPane hgap="10" layoutX="50.0" layoutY="72.0" prefHeight="99.0" prefWidth="433.0" vgap="10">
+                                    <columnConstraints>
+                                        <ColumnConstraints prefWidth="120.0" />
+                                        <ColumnConstraints prefWidth="200.0" />
+                                    </columnConstraints>
+                                    <children>
+                                        <Label text="Remitente:" />
+                                        <TextField fx:id="txtRemitente" GridPane.columnIndex="1" />
+
+                                        <Label text="Destinatario:" GridPane.rowIndex="1" />
+                                        <TextField fx:id="txtDestinatario" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                                    </children>
+                           <rowConstraints>
+                              <RowConstraints />
+                              <RowConstraints />
+                              <RowConstraints />
+                              <RowConstraints />
+                           </rowConstraints>
+                                </GridPane>
+
+                                <HBox layoutX="134.0" layoutY="204.0" spacing="15">
+                                    <children>
+                                        <Button fx:id="btnCrear" onAction="#crearSolicitud" text="Crear" />
+                                        <Button fx:id="btnModificar" onAction="#modificarSolicitud" text="Modificar" />
+                                        <Button fx:id="btnCancelar" onAction="#cancelarSolicitud" text="Cancelar" />
+                                    </children>
+                                </HBox>
+                                  <HBox layoutX="182.0" layoutY="177.0" prefHeight="17.0" prefWidth="265.0" spacing="10">
+                                      <children>
+                                          <CheckBox fx:id="chkSeguro" text="Seguro" />
+                                          <CheckBox fx:id="chkFragil" text="Frágil" />
+                                          <CheckBox fx:id="chkFirma" text="Firma" />
+                                          <CheckBox fx:id="chkPrioritario" text="Prioridad" />
+                                      </children>
+                                  </HBox>
+
+                                  <Label layoutX="50.0" layoutY="177.0" text="Servicios adicionales:" />
+                  
+                                <TableView fx:id="tablaSolicitudes" layoutX="32.0" layoutY="233.0" prefHeight="155.0" prefWidth="408.0">
+                                    <columns>
+                                        <TableColumn fx:id="colIdSolicitud" text="ID" />
+                                        <TableColumn fx:id="colRemitente" text="Remitente" />
+                                        <TableColumn fx:id="colDestinatario" text="Destinatario" />
+                                        <TableColumn fx:id="colEstadoSolicitud" text="Estado" />
+                                        <TableColumn fx:id="colFechaSolicitud" text="Fecha" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+
+                <!-- ========================================== -->
+                <!-- RF-005: Pagos -->
+                <!-- ========================================== -->
+                <Tab text="Comprobantes">
+                    <content>
+                        <AnchorPane>
+                            <children>
+                                <Label layoutX="50.0" layoutY="30.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Pagos y Comprobantes" />
+                                <TableView fx:id="tablaPago" layoutX="20.0" layoutY="76.0" prefHeight="250.0" prefWidth="453.0">
+                                    <columns>
+                                        <TableColumn fx:id="colIdEnvioPago" text="ID Envío" />
+                                        <TableColumn fx:id="colMontoPago" text="Monto" />
+                                        <TableColumn fx:id="colMetodoPago" text="Método" />
+                                        <TableColumn fx:id="colEstadoPago" text="Estado" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+
+                <!-- ========================================== -->
+                <!-- RF-005: Pagos -->
+                <!-- ========================================== -->
+                <Tab text="Pagos">
+                    <content>
+                        <AnchorPane>
+                            <children>
+                                <Label layoutX="50.0" layoutY="30.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Realizar Pago" />
+
+                                <Label layoutX="50.0" layoutY="80.0" text="ID del envío:" />
+                                <TextField fx:id="txtIdEnvioPagar" layoutX="150.0" layoutY="75.0" prefWidth="200.0" />
+
+                                <Label layoutX="50.0" layoutY="120.0" text="Método de pago:" />
+                                <!-- ✅ AÑADE ESTA LÍNEA -->
+                                <ComboBox fx:id="comboMetodoPago" layoutX="150.0" layoutY="115.0" prefWidth="200.0" />
+
+                                <Button fx:id="btnPagar" layoutX="50.0" layoutY="160.0" onAction="#pagarEnvio" text="Pagar Envío" />
+
+                                <TableView fx:id="tablaPagos" layoutX="17.0" layoutY="200.0" prefHeight="250.0" prefWidth="454.0">
+                                    <columns>
+                                        <TableColumn fx:id="colIdEnvioTablaPagos" text="ID Envío" />
+                                        <TableColumn fx:id="colMontoTablaPagos" text="Monto" />
+                                        <TableColumn fx:id="colMetodoTablaPagos" text="Método" />
+                                        <TableColumn fx:id="colEstadoTablaPagos" text="Estado" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+
+                <!-- ========================================== -->
+                <!-- RF-006: Rastreo -->
+                <!-- ========================================== -->
+                <Tab text="Rastreo">
+                    <content>
+                        <AnchorPane>
+                            <children>
+                                <Label layoutX="50.0" layoutY="30.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Rastreo de Envíos" />
+                                <Label layoutX="50.0" layoutY="80.0" text="ID de envío:" />
+                                <TextField fx:id="txtIdRastreo" layoutX="150.0" layoutY="75.0" />
+                                <Button fx:id="btnBuscarRastreo" layoutX="349.0" layoutY="76.0" text="Buscar" onAction="#buscarRastreo" />
+                                <Label fx:id="lblEstadoEnvio" layoutX="50.0" layoutY="130.0" text="Estado actual: " />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+
+                <!-- ========================================== -->
+                <!-- RF-008 + RF-009: Historial y Reportes -->
+                <!-- ========================================== -->
+                <Tab text="Historial">
+                    <content>
+                        <AnchorPane prefHeight="516.0" prefWidth="492.0">
+                            <children>
+                                <Label layoutX="50.0" layoutY="30.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Historial de Envíos" />
+                                <GridPane hgap="10" layoutX="50.0" layoutY="70.0" vgap="10">
+                                    <columnConstraints>
+                                        <ColumnConstraints prefWidth="120.0" />
+                                        <ColumnConstraints prefWidth="200.0" />
+                                    </columnConstraints>
+                                    <children>
+                                        <Label text="Desde:" />
+                                        <DatePicker fx:id="dateDesde" GridPane.columnIndex="1" />
+
+                                        <Label text="Hasta:" GridPane.rowIndex="1" />
+                                        <DatePicker fx:id="dateHasta" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                                        <Label text="Estado:" GridPane.rowIndex="2" />
+                                        <ComboBox fx:id="comboEstado" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    </children>
+                           <rowConstraints>
+                              <RowConstraints />
+                              <RowConstraints />
+                              <RowConstraints />
+                           </rowConstraints>
+                                </GridPane>
+                                <TableView fx:id="tablaHistorial" layoutX="14.0" layoutY="186.0" prefHeight="202.0" prefWidth="463.0">
+                                    <columns>
+                                        <TableColumn fx:id="colIdHistorial" text="ID" />
+                                        <TableColumn fx:id="colFechaHistorial" text="Fecha" />
+                                        <TableColumn fx:id="colOrigenHistorial" text="Origen" />
+                                        <TableColumn fx:id="colDestinoHistorial" text="Destino" />
+                                        <TableColumn fx:id="colEstadoHistorial" text="Estado" />
+                                    </columns>
+                                </TableView>
+
+                                <HBox layoutX="263.0" layoutY="153.0" spacing="15">
+                                    <children>
+                                        <Button fx:id="btnExportarPDF" onAction="#exportarPDF" text="Exportar PDF" />
+                                    </children>
+                                </HBox>
+                                <Button fx:id="btnFiltrar" layoutX="397.0" layoutY="153.0" onAction="#filtrarHistorial" text="Filtrar" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+
+                <!-- ========================================== -->
+                <!-- RF-002: Perfil -->
+                <!-- ========================================== -->
+                <Tab text="Perfil">
+                    <content>
+                        <AnchorPane>
+                            <children>
+                                <Label layoutX="50.0" layoutY="30.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Perfil de Usuario" />
+                                <GridPane hgap="10" layoutX="50.0" layoutY="70.0" vgap="10">
+                                    <columnConstraints>
+                                        <ColumnConstraints prefWidth="120.0" />
+                                        <ColumnConstraints prefWidth="200.0" />
+                                    </columnConstraints>
+                                    <GridPane hgap="10" layoutX="50.0" layoutY="70.0" vgap="10">
+                                        <columnConstraints>
+                                            <ColumnConstraints prefWidth="120.0" />
+                                            <ColumnConstraints prefWidth="200.0" />
+                                        </columnConstraints>
+                                        <rowConstraints>
+                                            <RowConstraints />
+                                            <RowConstraints />
+                                            <RowConstraints />
+                                            <RowConstraints />
+                                            <RowConstraints /> <!-- Para el botón -->
+                                        </rowConstraints>
+                                        <children>
+                                            <!-- Nombre -->
+                                            <Label text="Nombre:" />
+                                            <TextField fx:id="txtNombre" GridPane.columnIndex="1" />
+
+                                            <!-- Correo -->
+                                            <Label text="Correo:" GridPane.rowIndex="1" />
+                                            <TextField fx:id="txtCorreo" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                                            <!-- Teléfono -->
+                                            <Label text="Teléfono:" GridPane.rowIndex="2" />
+                                            <TextField fx:id="txtTelefono" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                                            <!-- Dirección (opcional) -->
+                                            <Label text="Dirección:" GridPane.rowIndex="3" />
+                                            <TextField fx:id="txtDireccion" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                                            <!-- Botón (en la fila 4) -->
+                                            <Button fx:id="btnGuardarPerfil" onAction="#guardarPerfil" text="Guardar Cambios"
+                                                    GridPane.rowIndex="4" GridPane.columnSpan="2" GridPane.halignment="CENTER" />
+                                        </children>
+                                    </GridPane>
+                           <rowConstraints>
+                              <RowConstraints />
+                              <RowConstraints />
+                              <RowConstraints />
+                              <RowConstraints />
+                           </rowConstraints>
+                                </GridPane>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <!-- ========================================== -->
+                <!-- Direcciones frecuentes -->
+                <!-- ========================================== -->
+                <Tab text="Direcciones">
+                    <content>
+                        <AnchorPane>
+                            <children>
+                                <Label layoutX="50.0" layoutY="30.0" style="-fx-font-size: 16px; -fx-font-weight: bold;" text="Mis Direcciones" />
+
+                                <!-- Formulario para nueva dirección -->
+                                <GridPane hgap="10" layoutX="50.0" layoutY="70.0" vgap="10">
+                                    <columnConstraints>
+                                        <ColumnConstraints prefWidth="120.0" />
+                                        <ColumnConstraints prefWidth="200.0" />
+                                    </columnConstraints>
+                                    <children>
+                                        <Label text="Nombre:" />
+                                        <TextField fx:id="txtNombreDir" GridPane.columnIndex="1" />
+
+                                        <Label text="Coordenadas:" GridPane.rowIndex="1" />
+                                        <TextField fx:id="txtCoordenadasDir" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    </children>
+                                    <rowConstraints>
+                                        <RowConstraints />
+                                        <RowConstraints />
+                                    </rowConstraints>
+                                </GridPane>
+
+                                <HBox layoutX="50.0" layoutY="130.0" spacing="10">
+                                    <children>
+                                        <Button fx:id="btnAgregarDireccion" onAction="#agregarDireccion" text="Agregar" />
+                                        <Button fx:id="btnActualizarDireccion" onAction="#actualizarDireccion" text="Actualizar" />
+                                        <Button fx:id="btnEliminarDireccion" onAction="#eliminarDireccion" text="Eliminar" />
+                                    </children>
+                                </HBox>
+
+                                <!-- Tabla de direcciones -->
+                                <TableView fx:id="tablaDirecciones" layoutX="20.0" layoutY="180.0" prefHeight="200.0" prefWidth="450.0">
+                                    <columns>
+                                        <TableColumn fx:id="colIdDir" text="ID" prefWidth="80"/>
+                                        <TableColumn fx:id="colNombreDir" text="Nombre" prefWidth="150"/>
+                                        <TableColumn fx:id="colCoordenadasDir" text="Coordenadas" prefWidth="200"/>
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>
